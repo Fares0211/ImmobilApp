@@ -1045,7 +1045,7 @@ def main():
         transform(df)
         
     else:
-        st.write('Exploration détaillée')
+        st.header('Plongez-vous au plus profond des données')
         st.write("Quelques graphiques paramétrés : sélectionner les valeurs par lesquelles vous voulez cumuler, grouper et trier les valeurs foncières")
         #df["code_commune"] = df["code_commune"].astype(str)
         #df["code_departement"] = df["code_departement"].astype(str)
