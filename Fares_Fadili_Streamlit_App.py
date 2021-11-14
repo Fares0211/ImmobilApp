@@ -1,3 +1,5 @@
+# Fares Fadili, M1-APP-BD
+# Projet Data Vizualisation
 
 import pickle
 import io
@@ -1005,26 +1007,28 @@ def main():
     if task == 'Accueil' :
         st.image('https://media.istockphoto.com/vectors/luxury-real-estate-agent-key-logo-vector-id1127282505?k=20&m=1127282505&s='
                          '170667a&w=0&h=qTnpsJnUv_wn3imUXzNKu8NPJFJCioHtx_9JK_7anRA=')
-        st.subheader('Bienvenue dans notre application')
+        st.header('Bienvenue dans notre application')
         st.write("Voici l'application qui vous permettra "
                  "de mieux visualiser et comprendre l'ensemble des données immobilières de l'année 2020...")
+        st.write("Sélectionnez sur votre gauche la visualisation que vous voulez !")
  
     elif task == 'Aperçu rapide':
         st.header('Faites-vous une idée globale')
-        st.write("Parcourez les données grâce à un aperçu dataset...")
+        st.write("Parcourez les données grâce à un aperçu du dataset...")
         df["code_commune"] = df["code_commune"].astype(str)
         df["code_departement"] = df["code_departement"].astype(str)
         st.write(df.head(15))
-        st.write('Carte')
+        st.write("...et situez-vous grâce à notre carte")
         st.map(df)
         
     elif task == 'Pandas profiling':
-        st.title('Ayez une autre vision des donnees')
+        st.header('Ayez une autre vision des donnees')
         st.write("Un rapport Pandas Profiling")
         pr = df.profile_report()
         st_profile_report(pr)
         
     elif task == 'SweetViz report':
+        st.header('Approchez les données différemment')
         st.write('Le rapport SweetViz arrive')
         mask = df.code_commune.apply(lambda x: isinstance(x, str))
         df = df[~mask]
@@ -1036,12 +1040,13 @@ def main():
         components.html(source_code, width=1300, height=800, scrolling=True)
         
     elif task == 'Pré-traitements':
-        st.write('Effectuer des transformations générales sur les données')
+        st.header('Modelez les données comme vous le souhaitez')
+        st.write('Effectuer des transformations générales sur les données !')
         transform(df)
         
     else:
-        st.write('Exploration détaillée des données')
-        st.write("Quelques graphiques paramétrés : séléctionner les valurs par lesquelles vous voulez cummuler, grouper et trier les valeurs foncières")
+        st.write('Exploration détaillée')
+        st.write("Quelques graphiques paramétrés : sélectionner les valeurs par lesquelles vous voulez cumuler, grouper et trier les valeurs foncières")
         #df["code_commune"] = df["code_commune"].astype(str)
         #df["code_departement"] = df["code_departement"].astype(str)
         df["month"] = df["month"].astype(str)
@@ -1051,12 +1056,12 @@ def main():
                     ,"nom_commune","code_departement"
                     ,"type_local","nature_culture"
                     ,"month"]
-        selected_columns = st.multiselect("select column", columns, default="code_departement")
+        selected_columns = st.multiselect("Sélectionner une ou plusieurs colonnes", columns, default="code_departement")
         s = df[selected_columns[0]].str.strip().value_counts()
         trace = go.Bar(x=s.index, y=s.values, showlegend=True)
         df1 = [trace]
         df1.sort()
-        layout = go.Layout(title="Valeur sélectionnée par rapport au cummul des valeurs foncières")
+        layout = go.Layout(title="Valeur sélectionnée par rapport au cumul des valeurs foncières")
         fig = go.Figure(data=df1, layout=layout)
         st.plotly_chart(fig)
 
