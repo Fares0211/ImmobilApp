@@ -1,7 +1,7 @@
 						Immobil’App
 
 
-#Aspects fonctionnels
+# Aspects fonctionnels
 
 INTRODUCTION : 
 Application Streamlit qui se constitue d’un ensemble de fonctionnalités modules complets et interactifs à la portée de tous (qui se veut ergonomique) ; permet de mieux visualiser les données foncières en France sur l’année 2020 (métropole + DOM-TOM).
